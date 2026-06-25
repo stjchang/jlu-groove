@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tai Chi Foundations · Early Bird · Jenny Lu Yoga+</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy:       #2F4851;
+  --teal:       #3E9DBA;
+  --gold:       #E2A752;
+  --gold-d:     #C58446;
+  --rust:       #C66C53;
+  --sky:        #A4DEF6;
+  --sky-pale:   #EBF6FC;
+  --sky-mid:    #D6EFF8;
+  --sky-dim:    #B2D9EE;
+  --silver:     #D5D8DB;
+  --white:      #FFFFFF;
+  --body:       #3D5560;
+  --gold-glow:  rgba(226, 167, 82, 0.35);
+  --section-pad: clamp(36px, 6vw, 48px);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 400;
+  color: var(--navy);
+  background: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 var(--gold-glow); }
+  50% { box-shadow: 0 0 0 10px transparent; }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes fillBar {
+  from { opacity: 0; transform: scaleX(0); transform-origin: left center; }
+  to { opacity: 1; transform: scaleX(1); transform-origin: left center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── SHARED ── */
+.wrap {
+  max-width: min(720px, 92vw);
+  margin: 0 auto;
+  padding: var(--section-pad) clamp(16px, 4vw, 24px);
+}
+
+.eyebrow {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 12px;
+}
+
+h1, h2 {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+h2 {
+  font-size: clamp(21px, 3.5vw, 26px);
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 14px;
+  color: var(--body);
+  line-height: 1.75;
+  margin-bottom: 10px;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: 'Quicksand', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 15px 32px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(226, 167, 82, 0.35);
+}
+.btn:hover {
+  background: var(--gold-d);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(226, 167, 82, 0.45);
+}
+.btn.wide {
+  width: 100%;
+  text-align: center;
+  display: block;
+  font-size: 16px;
+  padding: 16px;
+}
+
+/* ── STICKY URGENCY BAR ── */
+.urgency-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--navy);
+  color: var(--white);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 2px 12px rgba(47, 72, 81, 0.25);
+  animation: fadeIn 0.5s ease;
+}
+.urgency-bar__msg {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.urgency-bar__cta {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+.urgency-bar__cta:hover { color: var(--sky); }
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(155deg, var(--sky-dim) 0%, var(--sky-mid) 45%, var(--sky-pale) 100%);
+  padding: clamp(40px, 7vw, 56px) 24px clamp(36px, 6vw, 48px);
+  text-align: center;
+  border-bottom: 1px solid var(--silver);
+}
+.hero-tag {
+  display: inline-block;
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  animation: fadeUp 0.6s ease 0.1s both;
+}
+.hero h1 {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: clamp(30px, 7vw, 48px);
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  color: var(--navy);
+  margin-bottom: 8px;
+  animation: fadeUp 0.6s ease 0.2s both;
+}
+.hero-tagline {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-weight: 400;
+  font-size: clamp(16px, 2.8vw, 21px);
+  color: var(--teal);
+  letter-spacing: 0.04em;
+  margin-bottom: 28px;
+  animation: fadeUp 0.6s ease 0.3s both;
+}
+
+/* ── SAVINGS GAUGE ── */
+.savings-gauge {
+  max-width: min(480px, 92vw);
+  margin: 0 auto 28px;
+  background: var(--white);
+  border: 1.5px solid rgba(62, 157, 186, 0.25);
+  border-radius: 14px;
+  padding: 24px 22px 20px;
+  box-shadow: 0 8px 32px rgba(47, 72, 81, 0.08);
+  animation: fadeUp 0.7s ease 0.4s both;
+}
+.gauge-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 14px;
+}
+.gauge-label {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.gauge-label--early {
+  background: var(--rust);
+  color: var(--white);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+.gauge-label--regular { color: var(--silver); }
+
+.gauge-prices {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.gauge-price {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  line-height: 1;
+}
+.gauge-price--early {
+  font-size: clamp(36px, 8vw, 48px);
+  color: var(--navy);
+  position: relative;
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 8px;
+  animation: pulseGlow 2.5s ease infinite;
+}
+.gauge-price--regular {
+  font-size: clamp(22px, 5vw, 28px);
+  color: var(--silver);
+  text-decoration: line-through;
+  text-decoration-color: var(--rust);
+}
+
+.gauge-track-wrap {
+  position: relative;
+  height: 14px;
+  margin-bottom: 14px;
+  padding: 0 10px;
+}
+.gauge-track {
+  position: relative;
+  height: 100%;
+  background: var(--sky-mid);
+  border-radius: 7px;
+  overflow: visible;
+}
+.gauge-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: 7px;
+  background: linear-gradient(
+    90deg,
+    var(--teal) 0%,
+    var(--sky) 40%,
+    var(--sky-mid) 100%
+  );
+  background-size: 200% 100%;
+  animation: fillBar 1s ease 0.5s both, shimmer 4s linear 1.5s infinite;
+}
+.gauge-marker {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: var(--gold);
+  border: 3px solid var(--white);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(226, 167, 82, 0.5);
+  z-index: 2;
+}
+
+.gauge-foot {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--teal);
+  text-transform: uppercase;
+}
+
+.hero-cta { animation: fadeUp 0.6s ease 0.55s both; }
+
+.hero-meta {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 13px;
+  color: var(--teal);
+  margin-top: 20px;
+  line-height: 1.7;
+  animation: fadeUp 0.6s ease 0.65s both;
+}
+.hero-meta strong { color: var(--navy); font-weight: 700; }
+
+/* ── ABOUT + BENEFITS ── */
+.about {
+  background: var(--white);
+  border-bottom: 1px solid var(--silver);
+}
+.about .wrap {
+  max-width: min(960px, 94vw);
+  padding-top: clamp(32px, 5vw, 48px);
+  padding-bottom: clamp(32px, 5vw, 48px);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+.about-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(20px, 3vw, 36px) clamp(16px, 4vw, 40px);
+}
+.about-col--left {
+  border-right: 1px solid var(--silver);
+}
+.about-col__inner {
+  width: 100%;
+  max-width: 380px;
+}
+.about-copy p:last-child { margin-bottom: 0; }
+
+.benefit-grid {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+}
+.benefit-grid li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--navy);
+  line-height: 1.5;
+}
+.benefit-grid li::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+/* ── ESSENTIALS (Details + Instructor) ── */
+.essentials {
+  background: linear-gradient(180deg, var(--sky-pale) 0%, var(--white) 100%);
+  border-bottom: 1px solid var(--silver);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.detail-box {
+  background: var(--sky-pale);
+  border-radius: 6px;
+  padding: 16px;
+  border-left: 3px solid var(--teal);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.detail-box:hover {
+  border-left-color: var(--gold);
+  box-shadow: 0 4px 16px rgba(47, 72, 81, 0.06);
+}
+.detail-box .d-label {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 4px;
+}
+.detail-box .d-value {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.45;
+}
+.detail-box .d-sub {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 11px;
+  color: var(--teal);
+  margin-top: 2px;
+}
+
+.instructor-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid var(--silver);
+}
+.photo-circle {
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--silver);
+  border: 3px solid var(--teal);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.photo-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photo-placeholder {
+  font-size: 9px;
+  color: var(--body);
+  text-align: center;
+  line-height: 1.4;
+  padding: 8px;
+}
+.instructor-copy { flex: 1; min-width: 0; }
+.instructor-copy h2 {
+  font-size: 20px;
+  margin-bottom: 2px;
+}
+.instructor-copy .title-line {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--teal);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.instructor-copy p { margin-bottom: 0; font-size: 13px; }
+
+/* ── REGISTRATION ── */
+.register {
+  background: linear-gradient(160deg, var(--sky-mid) 0%, var(--sky-pale) 55%, var(--white) 100%);
+  padding: var(--section-pad) clamp(16px, 4vw, 24px);
+  text-align: center;
+}
+.reg-inner { max-width: min(500px, 92vw); margin: 0 auto; }
+
+.price-strip {
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 28px;
+  text-align: center;
+}
+.price-strip__label {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sky);
+  margin-bottom: 4px;
+}
+.price-strip__price {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.price-strip__note {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.04em;
+}
+
+.reg h2 { font-size: 24px; margin-bottom: 6px; }
+.reg-sub {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 13px;
+  color: var(--teal);
+  margin-bottom: 24px;
+  letter-spacing: 0.03em;
+}
+
+.reg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.f-group { display: flex; flex-direction: column; gap: 5px; }
+.f-group label {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.f-opt { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--body); }
+.f-group input, .f-group select {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 11px 13px;
+  border: 1.5px solid var(--silver);
+  border-radius: 4px;
+  background: var(--white);
+  color: var(--navy);
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.f-group input:focus, .f-group select:focus { border-color: var(--teal); }
+.f-group input::placeholder { color: var(--silver); font-weight: 400; }
+
+.policy-box {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--silver);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-top: 4px;
+}
+.policy-box p {
+  font-size: 12px;
+  color: var(--body);
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+.policy-box strong { color: var(--navy); font-weight: 700; }
+
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 2px;
+}
+.checkbox-row input[type="checkbox"] {
+  width: 16px; height: 16px;
+  flex-shrink: 0; margin-top: 3px;
+  accent-color: var(--teal);
+  cursor: pointer;
+}
+.checkbox-row label {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--body) !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  cursor: pointer;
+  line-height: 1.6;
+}
+
+.submit-area { margin-top: 8px; }
+.f-note {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 11px;
+  color: var(--teal);
+  text-align: center;
+  margin-top: 8px;
+  letter-spacing: 0.04em;
+  opacity: 0.9;
+}
+.secure {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 11px;
+  color: var(--teal);
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy);
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  padding: 22px 24px;
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+footer a { color: rgba(255, 255, 255, 0.55); text-decoration: none; }
+footer a:hover { color: var(--sky); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-col--left {
+    border-right: none;
+    border-bottom: 1px solid var(--silver);
+    padding-bottom: clamp(28px, 5vw, 36px);
+  }
+  .about-col {
+    padding-left: clamp(12px, 3vw, 20px);
+    padding-right: clamp(12px, 3vw, 20px);
+  }
+  .about-col__inner {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 580px) {
+  .urgency-bar { flex-direction: column; text-align: center; padding: 10px 16px; }
+  .urgency-bar__cta { white-space: normal; }
+  .hero { padding-left: 16px; padding-right: 16px; }
+  .hero-cta .btn { width: 100%; max-width: 340px; }
+  .register { padding-left: 16px; padding-right: 16px; }
+}
+
+@media (max-width: 480px) {
+  .f-row { grid-template-columns: 1fr; }
+  .details-grid { grid-template-columns: 1fr; }
+  .instructor-row { flex-direction: column; text-align: center; }
+  .savings-gauge { padding: 20px 16px 18px; }
+  .gauge-prices { gap: 8px; }
+  .btn { padding: 14px 20px; font-size: 14px; }
+  .btn.wide { font-size: 15px; }
+  h2 { font-size: clamp(19px, 5vw, 24px); }
+}
+</style>
+</head>
+<body>
+
+<header class="urgency-bar">
+  <span class="urgency-bar__msg">Limited Spots</span>
+  <a href="#register" class="urgency-bar__cta">Early Bird $127 → ends July 6</a>
+</header>
+
+<main>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-tag">Live Online · 5 Weeks · Starts July 10</div>
+  <h1>Tai Chi Foundations</h1>
+  <div class="hero-tagline">A 5-Week Online Program for Balance, Mobility &amp; Flow</div>
+
+  <div class="savings-gauge" aria-label="Early Bird pricing: $127 versus Regular $147">
+    <div class="gauge-labels">
+      <span class="gauge-label gauge-label--early">Early Bird</span>
+      <span class="gauge-label gauge-label--regular">Regular</span>
+    </div>
+    <div class="gauge-prices">
+      <span class="gauge-price gauge-price--early">$127</span>
+      <span class="gauge-price gauge-price--regular">$147</span>
+    </div>
+    <div class="gauge-track-wrap">
+      <div class="gauge-track">
+        <div class="gauge-fill"></div>
+        <div class="gauge-marker" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="gauge-foot">Save $20 · Register by July 6</div>
+  </div>
+
+  <div class="hero-cta">
+    <a href="#register" class="btn">Claim Early Bird Spot — Save $20</a>
+  </div>
+  <p class="hero-meta">
+    <strong>Five Fridays · July 10 – August 7, 2026</strong><br>
+    10:00 – 11:00 AM ET &nbsp;·&nbsp; Live on Zoom &nbsp;·&nbsp; Recordings through August 14
+  </p>
+</section>
+
+<!-- ══ ABOUT + BENEFITS ══ -->
+<section class="about">
+  <div class="wrap">
+    <div class="about-grid reveal">
+      <div class="about-col about-col--left">
+        <div class="about-col__inner about-copy">
+          <div class="eyebrow">About the Program</div>
+          <h2>Meditation in Motion — With a Strong Foundation</h2>
+          <p>Tai Chi is an ancient Chinese healing art often described as "meditation in motion." This 5-week online program is designed to help you build a strong foundation for your Tai Chi practice through gentle warm-ups, standing meditation (Zhan Zhuang), foundational Tai Chi principles, and a beginner-friendly Tai Chi form to put those principles into practice.</p>
+          <p>Whether you're new to Tai Chi or have learned forms before and want a deeper understanding, this program will help you move with greater ease, confidence, and flow. <em>Modifications will be provided.</em></p>
+        </div>
+      </div>
+      <div class="about-col">
+        <div class="about-col__inner about-benefits">
+          <div class="eyebrow">What You'll Gain</div>
+          <h2>Program Benefits</h2>
+          <ul class="benefit-grid">
+            <li>Improved balance and stability</li>
+            <li>Greater mobility and ease of movement</li>
+            <li>More confidence in your practice</li>
+            <li>Stress relief and a calmer mind</li>
+            <li>A deeper understanding of Tai Chi principles</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ESSENTIALS (Details + Instructor) ══ -->
+<section class="essentials">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">The Details</div>
+      <h2>What's Included</h2>
+      <div class="details-grid">
+        <div class="detail-box">
+          <div class="d-label">Format</div>
+          <div class="d-value">Live on Zoom</div>
+          <div class="d-sub">Attend from anywhere</div>
+        </div>
+        <div class="detail-box">
+          <div class="d-label">Schedule</div>
+          <div class="d-value">Fridays, 10–11 AM ET</div>
+          <div class="d-sub">July 10 – August 7, 2026</div>
+        </div>
+        <div class="detail-box">
+          <div class="d-label">Sessions</div>
+          <div class="d-value">5 Live Classes</div>
+          <div class="d-sub">Plus recordings through Aug 14</div>
+        </div>
+        <div class="detail-box">
+          <div class="d-label">Level</div>
+          <div class="d-value">All Levels Welcome</div>
+          <div class="d-sub">Modifications provided</div>
+        </div>
+      </div>
+
+      <div class="instructor-row">
+        <div class="photo-circle">
+          <!-- Replace src with Jenny's headshot when available -->
+          <span class="photo-placeholder">Your photo here</span>
+        </div>
+        <div class="instructor-copy">
+          <div class="eyebrow" style="margin-bottom:6px;">Your Instructor</div>
+          <h2>Jenny Lu</h2>
+          <div class="title-line">Certified Tai Chi, Qigong &amp; Yoga Instructor · Energy Master</div>
+          <p>Jenny has taught Tai Chi at studios, universities, corporations, libraries, and virtual programs for over 18 years. Her teaching blends clear, foundational instruction with warmth and accessibility — so every student, regardless of experience, leaves feeling more confident in their practice.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ REGISTRATION ══ -->
+<section class="register" id="register">
+  <div class="reg-inner">
+    <div class="price-strip reveal">
+      <div class="price-strip__label">Early Bird Pricing</div>
+      <div class="price-strip__price">$127</div>
+      <div class="price-strip__note">Save $20 · Ends July 6 · All 5 sessions + recordings through Aug 14</div>
+    </div>
+
+    <div class="reveal">
+      <div class="eyebrow" style="margin-bottom:8px;">Ready to Begin?</div>
+      <h2>Register for Tai Chi Foundations</h2>
+      <p class="reg-sub">Starts Friday, July 10 · 10:00 AM ET</p>
+
+      <div class="reg-form">
+        <div class="f-row">
+          <div class="f-group">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" placeholder="Jenny">
+          </div>
+          <div class="f-group">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" placeholder="Lu">
+          </div>
+        </div>
+        <div class="f-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" placeholder="you@email.com">
+        </div>
+        <div class="f-group">
+          <label for="phone">Phone <span class="f-opt">(optional — for session reminders)</span></label>
+          <input type="tel" id="phone" placeholder="(555) 000-0000">
+        </div>
+        <div class="f-group">
+          <label for="experience">Have you practiced Tai Chi before?</label>
+          <select id="experience">
+            <option value="">Select...</option>
+            <option>Yes, I've taken classes</option>
+            <option>I've practiced on my own / via video</option>
+            <option>No, I'm brand new to Tai Chi</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label for="referral">How did you hear about this program? <span class="f-opt">(optional)</span></label>
+          <select id="referral">
+            <option value="">Select...</option>
+            <option>Jenny's YouTube channel</option>
+            <option>Email list / waitlist</option>
+            <option>Instagram or Facebook</option>
+            <option>A friend or family member</option>
+            <option>In-person class or flyer</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="policy-box">
+          <p><strong>Registration &amp; Refund Policy</strong><br>
+          All sales are final. Because this is a live digital program with immediate access to course materials and recordings, we are unable to offer refunds after registration. If a scheduled session is cancelled by the instructor, a make-up session or recording will be provided. By registering, you agree to these terms.</p>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" id="policy-agree">
+          <label for="policy-agree">I understand that all sales are final and agree to the registration policy above.</label>
+        </div>
+
+        <div class="submit-area">
+          <button type="button" class="btn wide">Reserve My Spot — Early Bird $127</button>
+          <p class="f-note">Secure checkout &nbsp;·&nbsp; One-time payment &nbsp;·&nbsp; Recordings through Aug 14</p>
+        </div>
+      </div>
+      <div class="secure">🔒 Secure payment</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  © 2026 Jenny Lu Yoga+ &nbsp;·&nbsp; jennyluyoga.com/taichi &nbsp;·&nbsp;
+  Questions? <a href="mailto:jenny@jennyluyoga.com">Email Jenny</a>
+</footer>
+
+<script>
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      el.classList.add('visible');
+    });
+    return;
+  }
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    observer.observe(el);
+  });
+})();
+</script>
+
+</body>
+</html>
