@@ -91,8 +91,8 @@ body {
 .eyebrow {
   font-family: 'PT Sans Narrow', sans-serif;
   font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.16em;
+  font-size: 15px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--teal);
   margin-bottom: 14px;
@@ -411,6 +411,9 @@ p {
   background: linear-gradient(180deg, var(--sky-pale) 0%, var(--white) 100%);
   border-bottom: 1px solid var(--silver);
 }
+.essentials .wrap {
+  max-width: min(960px, 94vw);
+}
 
 .details-grid {
   display: grid;
@@ -447,10 +450,11 @@ p {
 }
 .detail-box .d-sub {
   font-family: 'PT Sans Narrow', sans-serif;
-  font-size: var(--text-sm);
+  font-size: var(--text-body);
   color: var(--navy);
-  opacity: 0.75;
-  margin-top: 4px;
+  opacity: 0.85;
+  margin-top: 6px;
+  line-height: 1.5;
 }
 
 .instructor-row {
@@ -461,7 +465,7 @@ p {
   border-top: 1px solid var(--silver);
 }
 .photo-circle {
-  width: 88px; height: 88px;
+  width: 300px; height: 300px;
   border-radius: 50%;
   flex-shrink: 0;
   background: var(--silver);
@@ -498,6 +502,56 @@ p {
   margin-bottom: 10px;
 }
 .instructor-copy p { margin-bottom: 0; font-size: var(--text-body); }
+
+/* ── TESTIMONIALS ── */
+.testimonials {
+  padding-top: 32px;
+  margin-top: 28px;
+  border-top: 1px solid var(--silver);
+  text-align: center;
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+  text-align: left;
+}
+.testimonial-card {
+  background: var(--white);
+  border: 1px solid var(--silver);
+  border-radius: 8px;
+  padding: 22px 20px;
+  border-top: 3px solid var(--teal);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+  margin: 0;
+}
+.testimonial-card__quote {
+  font-family: 'Quicksand', sans-serif;
+  font-size: var(--text-body);
+  font-weight: 400;
+  color: var(--body);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.testimonial-card__quote::before {
+  content: '\201C';
+  color: var(--teal);
+  font-weight: 700;
+  font-size: 1.25em;
+  line-height: 0;
+  margin-right: 2px;
+}
+.testimonial-card__author {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: 0.04em;
+}
 
 /* ── REGISTRATION ── */
 .register {
@@ -703,6 +757,12 @@ footer a { color: rgba(255, 255, 255, 0.75); text-decoration: none; }
 footer a:hover { color: var(--sky); }
 
 /* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 580px) {
   .urgency-bar { flex-direction: column; text-align: center; padding: 10px 16px; }
   .urgency-bar__cta { white-space: normal; }
@@ -826,14 +886,32 @@ footer a:hover { color: var(--sky); }
 
       <div class="instructor-row">
         <div class="photo-circle">
-          <!-- Replace src with Jenny's headshot when available -->
-          <span class="photo-placeholder">Your photo here</span>
+          <img src="headshot_large.jpg" alt="Jenny Lu, Tai Chi instructor">
         </div>
         <div class="instructor-copy">
           <div class="eyebrow" style="margin-bottom:6px;">Your Instructor</div>
           <h2>Jenny Lu</h2>
           <div class="title-line">Certified Tai Chi, Qigong &amp; Yoga Instructor · Energy Master</div>
           <p>Jenny has taught Tai Chi at studios, universities, corporations, libraries, and virtual programs for over 18 years. Her teaching blends clear, foundational instruction with warmth and accessibility — so every student, regardless of experience, leaves feeling more confident in their practice.</p>
+        </div>
+      </div>
+
+      <div class="testimonials reveal">
+        <div class="eyebrow">Testimonials</div>
+        <h2>What Students Are Saying</h2>
+        <div class="testimonials-grid">
+          <blockquote class="testimonial-card">
+            <p class="testimonial-card__quote">Jenny explains every movement so clearly. I feel steadier on my feet and more relaxed after each class.</p>
+            <footer class="testimonial-card__author">— Margaret R.</footer>
+          </blockquote>
+          <blockquote class="testimonial-card">
+            <p class="testimonial-card__quote">I was brand new to Tai Chi and a little unsure at first — the modifications made it easy to follow along from home.</p>
+            <footer class="testimonial-card__author">— David K.</footer>
+          </blockquote>
+          <blockquote class="testimonial-card">
+            <p class="testimonial-card__quote">The live Zoom sessions and recordings are perfect for my schedule. I keep coming back because I can actually feel the progress.</p>
+            <footer class="testimonial-card__author">— Susan L.</footer>
+          </blockquote>
         </div>
       </div>
     </div>
