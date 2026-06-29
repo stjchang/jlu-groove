@@ -703,14 +703,22 @@ p {
   align-items: flex-start;
   gap: 10px;
   margin-top: 2px;
+  position: relative;
+  cursor: pointer;
 }
 .checkbox-row input[type="checkbox"] {
   width: 20px; height: 20px;
   flex-shrink: 0; margin-top: 4px;
   accent-color: var(--teal);
   cursor: pointer;
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+  opacity: 1;
+  appearance: auto;
+  -webkit-appearance: checkbox;
 }
-.checkbox-row label {
+.checkbox-row .checkbox-text {
   font-size: var(--text-sm) !important;
   font-weight: 500 !important;
   color: var(--navy) !important;
@@ -721,6 +729,14 @@ p {
 }
 
 .submit-area { margin-top: 8px; }
+.checkout-hint {
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: var(--text-sm);
+  color: var(--rust);
+  text-align: center;
+  margin-top: 10px;
+  letter-spacing: 0.03em;
+}
 .f-note {
   font-family: 'PT Sans Narrow', sans-serif;
   font-size: var(--text-sm);
@@ -788,7 +804,7 @@ footer a:hover { color: var(--sky); }
 
 <header class="urgency-bar">
   <span class="urgency-bar__msg">Limited Spots</span>
-  <a href="#register" class="urgency-bar__cta">Early Bird $127 → ends July 6</a>
+  <a href="#jly-register" class="urgency-bar__cta">Early Bird $127 → ends July 6</a>
 </header>
 
 <main>
@@ -818,7 +834,7 @@ footer a:hover { color: var(--sky); }
   </div>
 
   <div class="hero-cta">
-    <a href="#register" class="btn">Claim Early Bird Spot — Save $20</a>
+    <a href="#jly-register" class="btn">Claim Early Bird Spot — Save $20</a>
   </div>
   <p class="hero-meta">
     <strong>Five Fridays · July 10 – August 7, 2026</strong><br>
@@ -919,7 +935,7 @@ footer a:hover { color: var(--sky); }
 </section>
 
 <!-- ══ REGISTRATION ══ -->
-<section class="register" id="register">
+<section class="register" id="jly-register">
   <div class="reg-inner">
     <div class="price-strip reveal">
       <div class="price-strip__label">Program Pricing</div>
@@ -947,25 +963,25 @@ footer a:hover { color: var(--sky); }
       <div class="reg-form">
         <div class="f-row">
           <div class="f-group">
-            <label for="fname">First Name</label>
-            <input type="text" id="fname" placeholder="Jenny">
+            <label for="jly-fname">First Name</label>
+            <input type="text" id="jly-fname" placeholder="Jenny">
           </div>
           <div class="f-group">
-            <label for="lname">Last Name</label>
-            <input type="text" id="lname" placeholder="Lu">
+            <label for="jly-lname">Last Name</label>
+            <input type="text" id="jly-lname" placeholder="Lu">
           </div>
         </div>
         <div class="f-group">
-          <label for="email">Email Address *</label>
-          <input type="email" id="email" placeholder="you@email.com">
+          <label for="jly-email">Email Address *</label>
+          <input type="email" id="jly-email" placeholder="you@email.com">
         </div>
         <div class="f-group">
-          <label for="phone">Phone <span class="f-opt">(optional — for session reminders)</span></label>
-          <input type="tel" id="phone" placeholder="(555) 000-0000">
+          <label for="jly-phone">Phone <span class="f-opt">(optional — for session reminders)</span></label>
+          <input type="tel" id="jly-phone" placeholder="(555) 000-0000">
         </div>
         <div class="f-group">
-          <label for="experience">Have you practiced Tai Chi before?</label>
-          <select id="experience">
+          <label for="jly-experience">Have you practiced Tai Chi before?</label>
+          <select id="jly-experience">
             <option value="">Select...</option>
             <option>Yes, I've taken classes</option>
             <option>I've practiced on my own / via video</option>
@@ -973,8 +989,8 @@ footer a:hover { color: var(--sky); }
           </select>
         </div>
         <div class="f-group">
-          <label for="referral">How did you hear about this program? <span class="f-opt">(optional)</span></label>
-          <select id="referral">
+          <label for="jly-referral">How did you hear about this program? <span class="f-opt">(optional)</span></label>
+          <select id="jly-referral">
             <option value="">Select...</option>
             <option>Jenny's YouTube channel</option>
             <option>Email list / waitlist</option>
@@ -989,13 +1005,14 @@ footer a:hover { color: var(--sky); }
           <p><strong>Registration &amp; Refund Policy</strong><br>
           All sales are final. Because this is a live digital program with immediate access to course materials and recordings, we are unable to offer refunds after registration. If a scheduled session is cancelled by the instructor, a make-up session or recording will be provided. By registering, you agree to these terms.</p>
         </div>
-        <div class="checkbox-row">
-          <input type="checkbox" id="policy-agree">
-          <label for="policy-agree">I understand that all sales are final and agree to the registration policy above.</label>
-        </div>
+        <label class="checkbox-row">
+          <input type="checkbox" id="jly-policy-agree">
+          <span class="checkbox-text">I understand that all sales are final and agree to the registration policy above.</span>
+        </label>
 
         <div class="submit-area">
-          <button type="button" class="btn wide">Reserve My Spot — Early Bird $127</button>
+          <button type="button" class="btn wide" id="jly-reserve-btn">Reserve My Spot — Early Bird $127</button>
+          <p class="checkout-hint" id="jly-checkout-hint" hidden>Please enter your email and agree to the registration policy to continue.</p>
           <p class="f-note">Secure checkout &nbsp;·&nbsp; One-time payment &nbsp;·&nbsp; Recordings through Aug 14</p>
         </div>
       </div>
@@ -1012,6 +1029,75 @@ footer a:hover { color: var(--sky); }
 
 <script>
 (function () {
+  // Stripe Dashboard → Payment Links → Early Bird link → copy the link URL
+  var STRIPE_CHECKOUT = {
+    paymentLinkUrl: 'https://buy.stripe.com/aFafZagT32HVcyceJC0x200'
+  };
+
+  var registerSection = document.getElementById('jly-register');
+  var reserveBtn = registerSection && registerSection.querySelector('#jly-reserve-btn');
+  var checkoutHint = registerSection && registerSection.querySelector('#jly-checkout-hint');
+  var emailInput = registerSection && registerSection.querySelector('#jly-email');
+  var policyCheckbox = registerSection && registerSection.querySelector('#jly-policy-agree');
+  var checkoutHintDefault = checkoutHint ? checkoutHint.textContent : '';
+
+  function isValidEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  function formIsValid() {
+    return emailInput && policyCheckbox &&
+      isValidEmail(emailInput.value.trim()) && policyCheckbox.checked;
+  }
+
+  function showCheckoutHint() {
+    checkoutHint.hidden = false;
+    if (!isValidEmail(emailInput.value.trim())) {
+      emailInput.focus();
+    } else {
+      policyCheckbox.focus();
+    }
+  }
+
+  function getCheckoutUrl() {
+    var url = new URL(STRIPE_CHECKOUT.paymentLinkUrl);
+    url.searchParams.set('prefilled_email', emailInput.value.trim());
+    return url.toString();
+  }
+
+  if (reserveBtn && checkoutHint && emailInput && policyCheckbox) {
+    reserveBtn.addEventListener('click', function () {
+      checkoutHint.hidden = true;
+      checkoutHint.textContent = checkoutHintDefault;
+
+      if (!formIsValid()) {
+        showCheckoutHint();
+        return;
+      }
+
+      if (!STRIPE_CHECKOUT.paymentLinkUrl || STRIPE_CHECKOUT.paymentLinkUrl.indexOf('REPLACE_WITH_YOUR_LINK') !== -1) {
+        checkoutHint.textContent = 'Stripe checkout is not configured yet. Add your payment link URL in the page script.';
+        checkoutHint.hidden = false;
+        return;
+      }
+
+      window.location.href = getCheckoutUrl();
+    });
+
+    [emailInput, policyCheckbox].forEach(function (el) {
+      el.addEventListener('input', function () {
+        if (formIsValid()) {
+          checkoutHint.hidden = true;
+        }
+      });
+      el.addEventListener('change', function () {
+        if (formIsValid()) {
+          checkoutHint.hidden = true;
+        }
+      });
+    });
+  }
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll('.reveal').forEach(function (el) {
       el.classList.add('visible');
