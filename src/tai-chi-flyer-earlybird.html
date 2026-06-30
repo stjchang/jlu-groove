@@ -684,93 +684,7 @@ p {
   letter-spacing: 0.03em;
 }
 
-.reg-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  text-align: left;
-}
-.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.f-group { display: flex; flex-direction: column; gap: 5px; }
-.f-group label {
-  font-family: 'PT Sans Narrow', sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--teal);
-}
-.f-opt { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--body); font-size: var(--text-sm); }
-.f-group input, .f-group select {
-  font-family: 'Quicksand', sans-serif;
-  font-size: var(--text-body);
-  font-weight: 400;
-  padding: 13px 14px;
-  border: 1.5px solid var(--silver);
-  border-radius: 4px;
-  background: var(--white);
-  color: var(--navy);
-  outline: none;
-  transition: border-color 0.2s;
-  width: 100%;
-}
-.f-group input:focus, .f-group select:focus { border-color: var(--teal); }
-.f-group input::placeholder { color: var(--silver); font-weight: 400; }
-
-.policy-box {
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid var(--silver);
-  border-radius: 8px;
-  padding: 14px 16px;
-  margin-top: 4px;
-}
-.policy-box p {
-  font-size: var(--text-sm);
-  color: var(--navy);
-  line-height: 1.75;
-  margin-bottom: 0;
-}
-.policy-box strong { color: var(--navy); font-weight: 700; }
-
-.checkbox-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-top: 2px;
-  position: relative;
-  cursor: pointer;
-}
-.checkbox-row input[type="checkbox"] {
-  width: 20px; height: 20px;
-  flex-shrink: 0; margin-top: 4px;
-  accent-color: var(--teal);
-  cursor: pointer;
-  position: relative;
-  z-index: 2;
-  pointer-events: auto;
-  opacity: 1;
-  appearance: auto;
-  -webkit-appearance: checkbox;
-}
-.checkbox-row .checkbox-text {
-  font-size: var(--text-sm) !important;
-  font-weight: 500 !important;
-  color: var(--navy) !important;
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-  cursor: pointer;
-  line-height: 1.6;
-}
-
 .submit-area { margin-top: 8px; }
-.checkout-hint {
-  font-family: 'PT Sans Narrow', sans-serif;
-  font-size: var(--text-sm);
-  color: var(--rust);
-  text-align: center;
-  margin-top: 10px;
-  letter-spacing: 0.03em;
-}
 .f-note {
   font-family: 'PT Sans Narrow', sans-serif;
   font-size: var(--text-sm);
@@ -826,7 +740,6 @@ footer a:hover { color: var(--sky); }
 }
 
 @media (max-width: 480px) {
-  .f-row { grid-template-columns: 1fr; }
   .details-grid { grid-template-columns: 1fr; }
   .instructor-row { flex-direction: column; text-align: center; }
   .savings-gauge { padding: 20px 16px 18px; }
@@ -1001,65 +914,9 @@ footer a:hover { color: var(--sky); }
       <h2>Register for Tai Chi Foundations</h2>
       <p class="reg-sub">Starts Friday, July 10 · 10:00 AM ET</p>
 
-
-
-      <!--Registration Form-->
-      <!---
-      <div class="reg-form">
-        <div class="f-row">
-          <div class="f-group">
-            <label for="jly-fname">First Name</label>
-            <input type="text" id="jly-fname" placeholder="Jenny">
-          </div>
-          <div class="f-group">
-            <label for="jly-lname">Last Name</label>
-            <input type="text" id="jly-lname" placeholder="Lu">
-          </div>
-        </div>
-        <div class="f-group">
-          <label for="jly-email">Email Address *</label>
-          <input type="email" id="jly-email" placeholder="you@email.com">
-        </div>
-        <div class="f-group">
-          <label for="jly-phone">Phone <span class="f-opt">(optional — for session reminders)</span></label>
-          <input type="tel" id="jly-phone" placeholder="(555) 000-0000">
-        </div>
-        <div class="f-group">
-          <label for="jly-experience">Have you practiced Tai Chi before?</label>
-          <select id="jly-experience">
-            <option value="">Select...</option>
-            <option>Yes, I've taken classes</option>
-            <option>I've practiced on my own / via video</option>
-            <option>No, I'm brand new to Tai Chi</option>
-          </select>
-        </div>
-        <div class="f-group">
-          <label for="jly-referral">How did you hear about this program? <span class="f-opt">(optional)</span></label>
-          <select id="jly-referral">
-            <option value="">Select...</option>
-            <option>Jenny's YouTube channel</option>
-            <option>Email list / waitlist</option>
-            <option>Instagram or Facebook</option>
-            <option>A friend or family member</option>
-            <option>In-person class or flyer</option>
-            <option>Other</option>
-          </select>
-        </div>
-      -->
-        <div class="policy-box">
-          <p><strong>Registration &amp; Refund Policy</strong><br>
-          All sales are final. Because this is a live digital program with immediate access to course materials and recordings, we are unable to offer refunds after registration. If a scheduled session is cancelled by the instructor, a make-up session or recording will be provided. By registering, you agree to these terms.</p>
-        </div>
-        <label class="checkbox-row">
-          <input type="checkbox" id="jly-policy-agree">
-          <span class="checkbox-text">I understand that all sales are final and agree to the registration policy above.</span>
-        </label>
-
-        <div class="submit-area">
-          <button type="button" class="btn wide" id="jly-reserve-btn">Reserve My Spot — Early Bird $127</button>
-          <p class="checkout-hint" id="jly-checkout-hint" hidden>Please enter your email and agree to the registration policy to continue.</p>
-          <p class="f-note">Secure checkout &nbsp;·&nbsp; One-time payment &nbsp;·&nbsp; Recordings through Aug 14</p>
-        </div>
+      <div class="submit-area">
+        <a href="https://buy.stripe.com/aFafZagT32HVcyceJC0x200" class="btn wide">Reserve My Spot — Early Bird $127</a>
+        <p class="f-note">Secure checkout &nbsp;·&nbsp; One-time payment &nbsp;·&nbsp; Recordings through Aug 14</p>
       </div>
       <div class="secure">🔒 Secure payment</div>
     </div>
@@ -1074,75 +931,6 @@ footer a:hover { color: var(--sky); }
 
 <script>
 (function () {
-  // Stripe Dashboard → Payment Links → Early Bird link → copy the link URL
-  var STRIPE_CHECKOUT = {
-    paymentLinkUrl: 'https://buy.stripe.com/aFafZagT32HVcyceJC0x200'
-  };
-
-  var registerSection = document.getElementById('jly-register');
-  var reserveBtn = registerSection && registerSection.querySelector('#jly-reserve-btn');
-  var checkoutHint = registerSection && registerSection.querySelector('#jly-checkout-hint');
-  var emailInput = registerSection && registerSection.querySelector('#jly-email');
-  var policyCheckbox = registerSection && registerSection.querySelector('#jly-policy-agree');
-  var checkoutHintDefault = checkoutHint ? checkoutHint.textContent : '';
-
-  function isValidEmail(value) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-  }
-
-  function formIsValid() {
-    return emailInput && policyCheckbox &&
-      isValidEmail(emailInput.value.trim()) && policyCheckbox.checked;
-  }
-
-  function showCheckoutHint() {
-    checkoutHint.hidden = false;
-    if (!isValidEmail(emailInput.value.trim())) {
-      emailInput.focus();
-    } else {
-      policyCheckbox.focus();
-    }
-  }
-
-  function getCheckoutUrl() {
-    var url = new URL(STRIPE_CHECKOUT.paymentLinkUrl);
-    url.searchParams.set('prefilled_email', emailInput.value.trim());
-    return url.toString();
-  }
-
-  if (reserveBtn && checkoutHint && emailInput && policyCheckbox) {
-    reserveBtn.addEventListener('click', function () {
-      checkoutHint.hidden = true;
-      checkoutHint.textContent = checkoutHintDefault;
-
-      if (!formIsValid()) {
-        showCheckoutHint();
-        return;
-      }
-
-      if (!STRIPE_CHECKOUT.paymentLinkUrl || STRIPE_CHECKOUT.paymentLinkUrl.indexOf('REPLACE_WITH_YOUR_LINK') !== -1) {
-        checkoutHint.textContent = 'Stripe checkout is not configured yet. Add your payment link URL in the page script.';
-        checkoutHint.hidden = false;
-        return;
-      }
-
-      window.location.href = getCheckoutUrl();
-    });
-
-    [emailInput, policyCheckbox].forEach(function (el) {
-      el.addEventListener('input', function () {
-        if (formIsValid()) {
-          checkoutHint.hidden = true;
-        }
-      });
-      el.addEventListener('change', function () {
-        if (formIsValid()) {
-          checkoutHint.hidden = true;
-        }
-      });
-    });
-  }
-
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll('.reveal').forEach(function (el) {
       el.classList.add('visible');
