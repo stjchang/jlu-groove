@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tai Chi Foundations · Early Bird · Jenny Lu Yoga+</title>
+<title>Tai Chi Foundations · Jenny Lu Yoga+</title>
 <script>
   window.PAGE_CONFIG = {
-    paymentLink: 'https://buy.stripe.com/aFafZagT32HVcyceJC0x200',
-    paymentLinkTest: 'https://buy.stripe.com/dRm00cgT382f7dSeJC0x202'
+    paymentLink: 'https://buy.stripe.com/dRm00cgT382f7dSeJC0x202'
   };
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;family=PT+Sans+Narrow:wght@400;700&amp;display=swap" rel="stylesheet">
@@ -54,18 +53,6 @@ body {
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }
-}
-@keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 0 0 var(--gold-glow); }
-  50% { box-shadow: 0 0 0 10px transparent; }
-}
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-@keyframes fillBar {
-  from { opacity: 0; transform: scaleX(0); transform-origin: left center; }
-  to { opacity: 1; transform: scaleX(1); transform-origin: left center; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -230,8 +217,8 @@ p {
   animation: fadeUp 0.6s ease 0.3s both;
 }
 
-/* ── SAVINGS GAUGE ── */
-.savings-gauge {
+/* ── HERO PRICE ── */
+.hero-price {
   max-width: min(480px, 92vw);
   margin: 0 auto 28px;
   background: var(--white);
@@ -241,102 +228,24 @@ p {
   box-shadow: 0 8px 32px rgba(47, 72, 81, 0.08);
   animation: fadeUp 0.7s ease 0.4s both;
 }
-.gauge-labels {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 14px;
-}
-.gauge-label {
-  font-family: 'PT Sans Narrow', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-.gauge-label--early {
-  background: var(--rust);
-  color: var(--white);
-  padding: 4px 12px;
-  border-radius: 20px;
-}
-.gauge-label--regular { color: var(--navy); opacity: 0.45; }
-
-.gauge-prices {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-.gauge-price {
+.hero-price__amount {
+  display: block;
   font-family: 'Quicksand', sans-serif;
   font-weight: 700;
-  line-height: 1;
-}
-.gauge-price--early {
   font-size: clamp(40px, 8vw, 52px);
+  line-height: 1;
   color: var(--navy);
-  position: relative;
-  display: inline-block;
-  padding: 4px 8px;
-  border-radius: 8px;
-  animation: pulseGlow 2.5s ease infinite;
+  margin-bottom: 8px;
 }
-.gauge-price--regular {
-  font-size: clamp(26px, 5vw, 32px);
-  color: var(--navy);
-  opacity: 0.5;
-  text-decoration: line-through;
-  text-decoration-color: var(--rust);
-}
-
-.gauge-track-wrap {
-  position: relative;
-  height: 14px;
-  margin-bottom: 14px;
-  padding: 0 10px;
-}
-.gauge-track {
-  position: relative;
-  height: 100%;
-  background: var(--sky-mid);
-  border-radius: 7px;
-  overflow: visible;
-}
-.gauge-fill {
-  position: absolute;
-  inset: 0;
-  border-radius: 7px;
-  background: linear-gradient(
-    90deg,
-    var(--teal) 0%,
-    var(--sky) 40%,
-    var(--sky-mid) 100%
-  );
-  background-size: 200% 100%;
-  animation: fillBar 1s ease 0.5s both, shimmer 4s linear 1.5s infinite;
-}
-.gauge-marker {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
-  background: var(--gold);
-  border: 3px solid var(--white);
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(226, 167, 82, 0.5);
-  z-index: 2;
-}
-
-.gauge-foot {
+.hero-price__note {
+  display: block;
   font-family: 'PT Sans Narrow', sans-serif;
   font-weight: 700;
   font-size: 15px;
   letter-spacing: 0.05em;
   color: var(--navy);
   text-transform: uppercase;
+  opacity: 0.85;
 }
 
 .hero-cta { animation: fadeUp 0.6s ease 0.55s both; }
@@ -632,20 +541,6 @@ p {
   align-items: center;
   gap: 4px;
 }
-.price-strip__tier-label {
-  font-family: 'PT Sans Narrow', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--sky);
-}
-.price-strip__tier-label--early {
-  background: var(--rust);
-  color: var(--white);
-  padding: 4px 14px;
-  border-radius: 20px;
-}
 .price-strip__price {
   font-family: 'Quicksand', sans-serif;
   font-weight: 700;
@@ -653,23 +548,11 @@ p {
   line-height: 1;
   color: var(--white);
 }
-.price-strip__price--regular {
-  font-size: 30px;
-  color: rgba(255, 255, 255, 0.55);
-  text-decoration: line-through;
-  text-decoration-color: var(--rust);
-}
 .price-strip__tier-note {
   font-family: 'PT Sans Narrow', sans-serif;
   font-size: var(--text-sm);
   color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0.03em;
-}
-.price-strip__divider {
-  width: 1px;
-  height: 64px;
-  background: rgba(255, 255, 255, 0.25);
-  flex-shrink: 0;
 }
 .price-strip__includes {
   font-family: 'PT Sans Narrow', sans-serif;
@@ -755,17 +638,12 @@ footer a:hover { color: var(--sky); }
   .hero { padding-left: 16px; padding-right: 16px; }
   .hero-cta .btn { width: 100%; max-width: 340px; }
   .register { padding-left: 16px; padding-right: 16px; }
-  .price-strip__divider {
-    width: 80%;
-    height: 1px;
-  }
 }
 
 @media (max-width: 480px) {
   .details-grid { grid-template-columns: 1fr; }
   .instructor-row { flex-direction: column; text-align: center; }
-  .savings-gauge { padding: 20px 16px 18px; }
-  .gauge-prices { gap: 8px; }
+  .hero-price { padding: 20px 16px 18px; }
 }
 </style>
 </head>
@@ -773,7 +651,7 @@ footer a:hover { color: var(--sky); }
 
 <header class="urgency-bar">
   <span class="urgency-bar__msg">Limited Spots</span>
-  <a href="#jly-register" class="urgency-bar__cta">Early Bird $127 → ends July 6</a>
+  <a href="#jly-register" class="urgency-bar__cta">Register — $147</a>
 </header>
 
 <main>
@@ -784,26 +662,13 @@ footer a:hover { color: var(--sky); }
   <h1>Tai Chi Foundations</h1>
   <div class="hero-tagline">A 5-Week Online Program for Balance, Mobility &amp; Flow</div>
 
-  <div class="savings-gauge" aria-label="Early Bird pricing: $127 versus Regular $147">
-    <div class="gauge-labels">
-      <span class="gauge-label gauge-label--early">Early Bird</span>
-      <span class="gauge-label gauge-label--regular">Regular</span>
-    </div>
-    <div class="gauge-prices">
-      <span class="gauge-price gauge-price--early">$127</span>
-      <span class="gauge-price gauge-price--regular">$147</span>
-    </div>
-    <div class="gauge-track-wrap">
-      <div class="gauge-track">
-        <div class="gauge-fill"></div>
-        <div class="gauge-marker" aria-hidden="true"></div>
-      </div>
-    </div>
-    <div class="gauge-foot">Save $20 · Register by July 6</div>
+  <div class="hero-price" aria-label="Program price: $147">
+    <span class="hero-price__amount">$147</span>
+    <span class="hero-price__note">One-time · All 5 live sessions + recordings</span>
   </div>
 
   <div class="hero-cta">
-    <a href="" class="btn payment-link">Claim Early Bird Spot — Save $20</a>
+    <a href="" class="btn payment-link">Register Now — $147</a>
   </div>
   <p class="hero-meta">
     <strong>Five Fridays · July 10 – August 7, 2026</strong><br>
@@ -917,18 +782,11 @@ footer a:hover { color: var(--sky); }
       <div class="price-strip__label">Program Pricing</div>
       <div class="price-strip__row">
         <div class="price-strip__tier">
-          <span class="price-strip__tier-label price-strip__tier-label--early">Early Bird</span>
-          <span class="price-strip__price">$127</span>
-          <span class="price-strip__tier-note">Register by July 6</span>
-        </div>
-        <div class="price-strip__divider" aria-hidden="true"></div>
-        <div class="price-strip__tier">
-          <span class="price-strip__tier-label">Regular</span>
-          <span class="price-strip__price price-strip__price--regular">$147</span>
+          <span class="price-strip__price">$147</span>
           <span class="price-strip__tier-note">Through July 10</span>
         </div>
       </div>
-      <div class="price-strip__includes">Save $20 with Early Bird · All 5 live sessions + recordings through Aug 14</div>
+      <div class="price-strip__includes">All 5 live sessions + recordings through Aug 14</div>
     </div>
 
     <div class="reveal">
@@ -937,7 +795,7 @@ footer a:hover { color: var(--sky); }
       <p class="reg-sub">Starts Friday, July 10 · 10:00 AM ET</p>
 
       <div class="submit-area">
-        <a href="" class="btn wide payment-link">Reserve My Spot — Early Bird $127</a>
+        <a href="" class="btn wide payment-link">Reserve My Spot — $147</a>
       </div>
 
       <div class="checkout-container">
@@ -957,7 +815,7 @@ footer a:hover { color: var(--sky); }
 
 <script>
 (function () {
-  var paymentLink = (window.PAGE_CONFIG && window.PAGE_CONFIG.paymentLinkTest) || '';
+  var paymentLink = (window.PAGE_CONFIG && window.PAGE_CONFIG.paymentLink) || '';
   document.querySelectorAll('.payment-link').forEach(function (link) {
     link.href = paymentLink;
   });
